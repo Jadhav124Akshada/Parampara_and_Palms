@@ -1,0 +1,28 @@
+.sidebar{
+    width: 250px;
+    height: 100vh;
+    position:fixed;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.list-group-item:hover{
+    background-color: #5a5959 !important;
+    border:none !important;
+    padding: 12px 20px;
+
+}
+.sidebar .list-group {
+    border: none;
+}
+
+#page-content-wrapper.full-width {
+    margin-left: 0px;
+    transition : all 0.3s ease;
+}
+#page-content-wrapper.with-sidebar {
+    margin-left: 250px;
+    transition : all 0.3s ease;
+}

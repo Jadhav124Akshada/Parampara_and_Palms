@@ -1,0 +1,35 @@
+.hero{
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 300px;
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.hovereffect:hover{
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.heart-anim:hover{
+    transform: scale(1.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease-in-out;
+}
