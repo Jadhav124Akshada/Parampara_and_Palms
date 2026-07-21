@@ -21,7 +21,7 @@ const OrderDetails = () => {
             navigate('/login');
             return;
         }
-        fetch(`http://localhost:8000/api/orders/by_order_number/${order_number}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/orders/by_order_number/${order_number}/`)
             .then(res => res.json())
             .then(data => {
                 setOrderItems(data);
@@ -31,7 +31,7 @@ const OrderDetails = () => {
                 setTotal(totalAmount);
             });
 
-        fetch(`http://localhost:8000/api/order_address/${order_number}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/order_address/${order_number}/`)
             .then(res => res.json())
             .then(data => {
                 setOrderAddress(data);
@@ -98,7 +98,7 @@ const OrderDetails = () => {
                                 <p><strong>Payment Mode: </strong><span className='badge bg-info text-dark'>{orderAddress.payment_mode}</span></p>
                                 <p><strong>Total: </strong>₹ {total}</p>
                                 
-                                <a href={`http://localhost:8000/api/invoice/${order_number}`} target='_blank' rel="noreferrer" className='btn btn-success w-100 my-2 d-flex align-items-center justify-content-center'>
+                                <a href={`https://parampara-and-palms.onrender.com/api/invoice/${order_number}`} target='_blank' rel="noreferrer" className='btn btn-success w-100 my-2 d-flex align-items-center justify-content-center'>
                                     <FaFileInvoice className="me-2" /> Invoice
                                 </a>
 

@@ -25,18 +25,18 @@ const FoodDetail = () => {
     // डेटा लोड करने का मुख्य हुक
     useEffect(() => {
         // 1. फ़ूड आइटम डिटेल्स फ़ेच करें
-        fetch(`http://localhost:8000/api/foods/${id}`)
+        fetch(`https://parampara-and-palms.onrender.com/api/foods/${id}`)
             .then(res => res.json())
             .then(data => setFood(data));
 
         // 2. इस फ़ूड के सभी रिव्यूज़ फ़ेच करें
-        fetch(`http://localhost:8000/api/reviews/${id}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/reviews/${id}/`)
             .then(res => res.json())
             .then(data => setReviews(data))
             .catch(err => console.error("Error fetching reviews:", err));
 
         // 3. बैकएंड से ओवरऑल रेटिंग का एवरेज और ब्रेकडाउन समरी फ़ेच करें
-        fetch(`http://localhost:8000/api/food-rating-summary/${id}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/food-rating-summary/${id}/`)
             .then(res => res.json())
             .then(data => setSummary(data))
             .catch(err => console.error("Error fetching rating summary:", err));
@@ -45,11 +45,11 @@ const FoodDetail = () => {
     // हेल्पर फ़ंक्शन: सबमिशन या डिलीट के बाद समरी को तुरंत रिफ्रेश करने के लिए
     const refreshReviewsAndSummary = async () => {
         try {
-            const resReviews = await fetch(`http://localhost:8000/api/reviews/${id}/`);
+            const resReviews = await fetch(`https://parampara-and-palms.onrender.com/api/reviews/${id}/`);
             const dataReviews = await resReviews.json();
             setReviews(dataReviews);
 
-            const resSummary = await fetch(`http://localhost:8000/api/food-rating-summary/${id}/`);
+            const resSummary = await fetch(`https://parampara-and-palms.onrender.com/api/food-rating-summary/${id}/`);
             const dataSummary = await resSummary.json();
             setSummary(dataSummary);
         } catch (err) {
@@ -64,7 +64,7 @@ const FoodDetail = () => {
             return;
         }
         try {
-            const response = await fetch('http://localhost:8000/api/cart/add/', {
+            const response = await fetch('https://parampara-and-palms.onrender.com/api/cart/add/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -110,8 +110,8 @@ const FoodDetail = () => {
         };
 
         const url = editId 
-            ? `http://localhost:8000/api/review-edit/${editId}/`
-            : `http://localhost:8000/api/reviews/add/${id}/`;
+            ? `https://parampara-and-palms.onrender.com/api/review-edit/${editId}/`
+            : `https://parampara-and-palms.onrender.com/api/reviews/add/${id}/`;
 
         const method = editId ? 'PUT' : 'POST';
 
@@ -148,7 +148,7 @@ const FoodDetail = () => {
         if (!window.confirm("Are you sure you want to delete this review?")) return;
 
         try {
-            const response = await fetch(`http://localhost:8000/api/review-delete/${reviewId}/`, {
+            const response = await fetch(`https://parampara-and-palms.onrender.com/api/review-delete/${reviewId}/`, {
                 method: 'DELETE'
             });
 

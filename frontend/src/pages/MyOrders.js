@@ -14,7 +14,7 @@ const MyOrders = () => {
             navigate('/login');
             return;
         }
-        fetch(`http://localhost:8000/api/orders/${userId}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/orders/${userId}/`)
             .then(res => res.json())
             .then(data => {
                 setOrders(data);

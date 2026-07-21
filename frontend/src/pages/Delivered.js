@@ -15,7 +15,7 @@ const Delivered = () => {
             return;
         }
 
-        fetch('http://localhost:8000/api/delivered/')
+        fetch('https://parampara-and-palms.onrender.com/api/delivered/')
             .then(res => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 return res.json();

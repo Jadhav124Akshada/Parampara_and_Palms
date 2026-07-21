@@ -7,7 +7,7 @@ const SearchPage = () => {
     const [results, setResults] = useState([]);
      useEffect(() => {
         if (query) {
-                fetch(`http://localhost:8000/api/search-food/?q=${query}`)
+                fetch(`https://parampara-and-palms.onrender.com/api/search-food/?q=${query}`)
                     .then(res => res.json())
                     .then(data => {
                         setResults(data);

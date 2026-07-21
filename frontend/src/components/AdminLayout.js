@@ -11,7 +11,7 @@ const AdminLayout = ({children}) => {
    useEffect(() => {
         let isMounted = true;
 
-        fetch(`http://localhost:8000/api/dashboard-metrics/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/dashboard-metrics/`)
             .then(res => res.json())
             .then(data => {
                 if (isMounted && data.metrics) {

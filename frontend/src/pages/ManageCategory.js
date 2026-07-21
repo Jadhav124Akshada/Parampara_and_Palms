@@ -12,7 +12,7 @@ const ManageCategory = () => {
     const [itemsPerPage] = useState(10);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/categories/')
+        fetch('https://parampara-and-palms.onrender.com/api/categories/')
             .then(res => res.json())
             .then(data => {
                 const fetchedData = Array.isArray(data) ? data : (data.categories || []);
@@ -37,7 +37,7 @@ const ManageCategory = () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this category?")) {
-            fetch(`http://localhost:8000/api/category/${id}/`, { method: 'DELETE' })
+            fetch(`https://parampara-and-palms.onrender.com/api/category/${id}/`, { method: 'DELETE' })
             .then(res => res.json())
             .then(data => {
                 toast.success("Category deleted");

@@ -11,7 +11,7 @@ const AddCategory = () => {
  const handleSubmit = async (e) => {
         e.preventDefault(); 
         try { 
-    const response = await fetch('http://localhost:8000/api/add-category/', {
+    const response = await fetch('https://parampara-and-palms.onrender.com/api/add-category/', {
           method: 'POST',
           headers: {'Content-Type': 'application/json', },
           body: JSON.stringify({category_name : categoryName}),

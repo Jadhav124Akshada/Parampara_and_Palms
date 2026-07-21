@@ -15,7 +15,7 @@ const AllOrders = () => {
             return;
         }
 
-        fetch('http://localhost:8000/api/all-orders/')
+        fetch('https://parampara-and-palms.onrender.com/api/all-orders/')
             .then(res => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 return res.json();

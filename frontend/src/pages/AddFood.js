@@ -19,7 +19,7 @@ const AddFood = () => {
 
     
         useEffect(() => {
-            fetch('http://localhost:8000/api/categories/')
+            fetch('https://parampara-and-palms.onrender.com/api/categories/')
                 .then(res => res.json())
                 .then(data => {
                     setCategories(data);
@@ -54,7 +54,7 @@ const AddFood = () => {
         result.append('image', formData.image);
     }
             try { 
-        const response = await fetch('http://localhost:8000/api/add-food/', {
+        const response = await fetch('https://parampara-and-palms.onrender.com/api/add-food/', {
               method: 'POST',
               body: result,  
           });

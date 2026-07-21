@@ -27,7 +27,7 @@ const EditFood = () => {
         }
 
         // Fetch the existing food data to populate the form fields
-        fetch(`http://localhost:8000/api/edit-food/${id}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/edit-food/${id}/`)
             .then(res => res.json())
             .then(data => {
                 setFormData({
@@ -43,7 +43,7 @@ const EditFood = () => {
             .catch(err => console.error("Fetch food error:", err));
 
         // Fetch categories for the select dropdown list
-        fetch(`http://localhost:8000/api/categories/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/categories/`)
             .then(res => res.json())
             .then(data => setCategories(data))
             .catch(err => console.error("Fetch categories error:", err));    
@@ -82,7 +82,7 @@ const EditFood = () => {
         }
 
         try { 
-            const response = await fetch(`http://localhost:8000/api/edit-food/${id}/`, {
+            const response = await fetch(`https://parampara-and-palms.onrender.com/api/edit-food/${id}/`, {
                 method: 'PUT',
                 body: result,  
             });

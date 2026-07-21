@@ -156,7 +156,7 @@ const Chatbot = () => {
 
             const response = await fetch(
 
-                "http://localhost:8000/api/chatbot/",
+                "https://parampara-and-palms.onrender.com/api/chatbot/",
 
                 {
 

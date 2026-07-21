@@ -35,7 +35,7 @@ const Register = () => {
         }
 
         try { 
-            const response = await fetch('http://localhost:8000/api/register/', {
+            const response = await fetch('https://parampara-and-palms.onrender.com/api/register/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ Firstname, Lastname, Email, MobileNo, Password }),

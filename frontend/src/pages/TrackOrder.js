@@ -29,7 +29,7 @@ const TrackOrder = () => {
     setTrackingData([]); // Clear out stale historical data before rendering next state
 
     try {
-      const response = await fetch(`http://localhost:8000/api/track/${targetOrderNo.trim()}/`);
+      const response = await fetch(`https://parampara-and-palms.onrender.com/api/track/${targetOrderNo.trim()}/`);
       const data = await response.json();
 
       if (response.ok) {

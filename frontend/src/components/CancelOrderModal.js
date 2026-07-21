@@ -17,7 +17,7 @@ const CancelOrderModal = ({ show, handleClose, orderNumber, paymentMode }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/order-cancelled/`, {
+            const response = await fetch(`https://parampara-and-palms.onrender.com/api/order-cancelled/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

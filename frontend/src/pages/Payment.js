@@ -38,7 +38,7 @@ const Payment = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/place_order/', {
+            const response = await fetch('https://parampara-and-palms.onrender.com/api/place_order/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -19,7 +19,7 @@ const ManageUser = () => {
             navigate('/admin-login');
             return;
         }
-        fetch('http://localhost:8000/api/users/') 
+        fetch('https://parampara-and-palms.onrender.com/api/users/') 
             .then(res => res.json())
             .then(data => {
                 const fetchedData = Array.isArray(data) ? data : (data.users || []);
@@ -48,7 +48,7 @@ const ManageUser = () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
-            fetch(`http://localhost:8000/api/users/${id}/`, {
+            fetch(`https://parampara-and-palms.onrender.com/api/users/${id}/`, {
                 method: 'DELETE'
             })
             .then(res => res.json())

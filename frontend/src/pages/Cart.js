@@ -19,7 +19,7 @@ const Cart = () => {
             navigate('/login');
             return;
         }
-        fetch(`http://localhost:8000/api/cart/${userId}`)
+        fetch(`https://parampara-and-palms.onrender.com/api/cart/${userId}`)
             .then(res => res.json())
             .then(data => {
                 const fetchedData = Array.isArray(data) ? data : [];
@@ -38,7 +38,7 @@ const Cart = () => {
     const updateQuantity = async (OrderId, newQty) => {
         if (newQty < 1) return;
         try {
-            const response = await fetch('http://localhost:8000/api/cart/update_quantity/', {
+            const response = await fetch('https://parampara-and-palms.onrender.com/api/cart/update_quantity/', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -48,7 +48,7 @@ const Cart = () => {
             });
             const data = await response.json();
             if (response.status === 200) {
-                const updated = await fetch(`http://localhost:8000/api/cart/${userId}`);
+                const updated = await fetch(`https://parampara-and-palms.onrender.com/api/cart/${userId}`);
                 const freshData = await updated.json();
                 const cleanData = Array.isArray(freshData) ? freshData : [];
                 
@@ -73,12 +73,12 @@ const Cart = () => {
         if (!confirmDelete) return; // FIXED: Stops item deletion if user cancels prompt box
 
         try {
-            const response = await fetch(`http://localhost:8000/api/cart/delete/${OrderId}/`, {
+            const response = await fetch(`https://parampara-and-palms.onrender.com/api/cart/delete/${OrderId}/`, {
                 method: 'DELETE',
             });
             const data = await response.json();
             if (response.status === 200) {
-                const updated = await fetch(`http://localhost:8000/api/cart/${userId}`);
+                const updated = await fetch(`https://parampara-and-palms.onrender.com/api/cart/${userId}`);
                 const freshData = await updated.json();
                 const cleanData = Array.isArray(freshData) ? freshData : [];
                 

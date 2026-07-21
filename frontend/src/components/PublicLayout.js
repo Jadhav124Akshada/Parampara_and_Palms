@@ -51,7 +51,7 @@ const PublicLayout = ({ children }) => {
       try{
 
         const response = await fetch(
-          `http://localhost:8000/api/cart/${userId}/`
+          `https://parampara-and-palms.onrender.com/api/cart/${userId}/`
         );
 
         const data = await response.json();
@@ -99,7 +99,7 @@ const PublicLayout = ({ children }) => {
 
 
         const response = await fetch(
-          `http://localhost:8000/api/wishlist/${userId}/`
+          `https://parampara-and-palms.onrender.com/api/wishlist/${userId}/`
         );
 
 

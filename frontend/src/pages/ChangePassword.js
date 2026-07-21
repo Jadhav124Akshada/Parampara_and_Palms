@@ -32,7 +32,7 @@ const ChangePassword = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/change_password/${userId}/`, {
+            const response = await fetch(`https://parampara-and-palms.onrender.com/api/change_password/${userId}/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 // Fixed typo here: current_password

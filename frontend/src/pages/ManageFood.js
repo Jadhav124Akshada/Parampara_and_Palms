@@ -12,7 +12,7 @@ const ManageFood = () => {
     const [itemsPerPage] = useState(10);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/food/')
+        fetch('https://parampara-and-palms.onrender.com/api/food/')
             .then(res => res.json())
             .then(data => {
                 const fetchedData = Array.isArray(data) ? data : (data.food || []);
@@ -37,7 +37,7 @@ const ManageFood = () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this food item?")) {
-            fetch(`http://localhost:8000/api/delete-food/${id}/`, { method: 'DELETE' })
+            fetch(`https://parampara-and-palms.onrender.com/api/delete-food/${id}/`, { method: 'DELETE' })
             .then(res => res.json())
             .then(data => {
                 toast.success(data.message || "Food item deleted successfully");

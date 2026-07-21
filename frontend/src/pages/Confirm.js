@@ -15,7 +15,7 @@ const Confirm = () => {
             return;
         }
 
-        fetch('http://localhost:8000/api/confirmed/')
+        fetch('https://parampara-and-palms.onrender.com/api/confirmed/')
             .then(res => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 return res.json();

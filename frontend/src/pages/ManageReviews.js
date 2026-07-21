@@ -25,7 +25,7 @@ const ManageReviews = () => {
             return;
         }
 
-        fetch('http://localhost:8000/api/all-reviews/')
+        fetch('https://parampara-and-palms.onrender.com/api/all-reviews/')
             .then(res => {
                 if (!res.ok) throw new Error("Network response was not ok");
                 return res.json();
@@ -47,7 +47,7 @@ const ManageReviews = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:8000/api/review-delete/${reviewId}/`, {
+            const res = await fetch(`https://parampara-and-palms.onrender.com/api/review-delete/${reviewId}/`, {
                 method: 'DELETE'
             });
             const data = await res.json();

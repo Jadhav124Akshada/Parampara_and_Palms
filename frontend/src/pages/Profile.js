@@ -20,7 +20,7 @@ const Profile = () => {
             navigate('/login');
             return;
         }
-        fetch(`http://localhost:8000/api/user/${userId}`)
+        fetch(`https://parampara-and-palms.onrender.com/api/user/${userId}`)
             .then(res => res.json())
             .then(data => {
                 setFormData(data);
@@ -36,7 +36,7 @@ const Profile = () => {
                     e.preventDefault(); 
               
                     try { 
-                const response = await fetch(`http://localhost:8000/api/update/${userId}/`, {
+                const response = await fetch(`https://parampara-and-palms.onrender.com/api/update/${userId}/`, {
                       method: 'PUT',
                         headers: {'Content-Type': 'application/json', },
                          body: JSON.stringify({first_name:formData.first_name, last_name:formData.last_name}),

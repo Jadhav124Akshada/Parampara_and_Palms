@@ -29,7 +29,7 @@ const OrderReport = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); 
         try { 
-            const response = await fetch('http://localhost:8000/api/order-between-dates/', {
+            const response = await fetch('https://parampara-and-palms.onrender.com/api/order-between-dates/', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

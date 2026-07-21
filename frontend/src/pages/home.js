@@ -19,7 +19,7 @@ const Home = () => {
 
   // Fetch random food choices for home page display
   useEffect(() => {
-    fetch(`http://localhost:8000/api/random-food`)
+    fetch(`https://parampara-and-palms.onrender.com/api/random-food`)
       .then(res => res.json())
       .then(data => {
         setFoods(data);
@@ -36,7 +36,7 @@ const Home = () => {
       
       for (let item of foods) {
         try {
-          const res = await fetch(`http://localhost:8000/api/food-rating-summary/${item.id}/`);
+          const res = await fetch(`https://parampara-and-palms.onrender.com/api/food-rating-summary/${item.id}/`);
           if (res.ok) {
             const summary = await res.json();
             aggregatedMap[item.id] = summary;
@@ -54,7 +54,7 @@ const Home = () => {
   // Load the authenticated user's active favorites list context map
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:8000/api/wishlist/${userId}/`)
+      fetch(`https://parampara-and-palms.onrender.com/api/wishlist/${userId}/`)
         .then(res => res.json())
         .then(data => {
           const wishlistIds = Array.isArray(data) 
@@ -78,7 +78,7 @@ const Home = () => {
     const endpoint = isInWishlist ? 'remove-wishlist/' : 'add-wishlist/';
     
     try {
-      const response = await fetch(`http://localhost:8000/api/${endpoint}`, {
+      const response = await fetch(`https://parampara-and-palms.onrender.com/api/${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, food_id: foodId })

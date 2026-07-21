@@ -26,7 +26,7 @@ const SearchOrder = () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8000/api/search-orders/?q=${searchTerm}`);
+            const response = await fetch(`https://parampara-and-palms.onrender.com/api/search-orders/?q=${searchTerm}`);
             const data = await response.json();
 
 

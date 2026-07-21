@@ -19,8 +19,8 @@ const FoodList = () => {
 
     useEffect(() => {
         Promise.all([
-            fetch('http://localhost:8000/api/food/').then(res => res.json()),
-            fetch('http://localhost:8000/api/categories/').then(res => res.json())
+            fetch('https://parampara-and-palms.onrender.com/api/food/').then(res => res.json()),
+            fetch('https://parampara-and-palms.onrender.com/api/categories/').then(res => res.json())
         ])
         .then(([foodData, catData]) => {
             const cleanFood = Array.isArray(foodData) ? foodData : (foodData.food || []);

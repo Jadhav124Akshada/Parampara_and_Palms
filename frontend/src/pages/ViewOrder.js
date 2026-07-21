@@ -16,7 +16,7 @@ const ViewOrder = () => {
             return;
         }
 
-        fetch(`http://localhost:8000/api/view_order_details/${orderNumber}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/view_order_details/${orderNumber}/`)
             .then(res => {
                 if (!res.ok) throw new Error("Order not found");
                 return res.json();
@@ -44,7 +44,7 @@ const ViewOrder = () => {
         const statusVal = e.target.status.value;
         const remark = e.target.remark.value;
 
-        fetch('http://localhost:8000/api/update-order-status/', {
+        fetch('https://parampara-and-palms.onrender.com/api/update-order-status/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ order_number: order?.order_number, status: statusVal, remark }),

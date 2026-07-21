@@ -17,7 +17,7 @@ const EditCategory = () => {
             navigate('/admin-login');
             return;
         }
-        fetch(`http://localhost:8000/api/category/${id}/`)
+        fetch(`https://parampara-and-palms.onrender.com/api/category/${id}/`)
             .then(res => res.json())
             .then(data => setCategoryName(data.category_name))
             .catch(err => console.error("Update error:", err));
@@ -30,7 +30,7 @@ const EditCategory = () => {
 
         const handleUpdate = (e) => {
             e.preventDefault();
-            fetch(`http://localhost:8000/api/category/${id}/`, {
+            fetch(`https://parampara-and-palms.onrender.com/api/category/${id}/`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ category_name: categoryName }),

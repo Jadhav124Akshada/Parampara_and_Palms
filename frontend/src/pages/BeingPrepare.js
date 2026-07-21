@@ -15,7 +15,7 @@ const BeingPrepare = () => {
             return;
         }
 
-        fetch('http://localhost:8000/api/being-prepared/')
+        fetch('https://parampara-and-palms.onrender.com/api/being-prepared/')
             .then(res => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 return res.json();

@@ -19,7 +19,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:8000/api/wishlist/${userId}/`)
+      fetch(`https://parampara-and-palms.onrender.com/api/wishlist/${userId}/`)
         .then(res => res.json())
         .then(data => {
           setWishlistItems(data);
@@ -37,7 +37,7 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (foodId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/remove-wishlist/`, {
+      const response = await fetch(`https://parampara-and-palms.onrender.com/api/remove-wishlist/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, food_id: foodId })

@@ -15,7 +15,7 @@ const Pickup = () => {
             return;
         }
 
-        fetch('http://localhost:8000/api/food-picked-up/')
+        fetch('https://parampara-and-palms.onrender.com/api/food-picked-up/')
             .then(res => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 return res.json();
