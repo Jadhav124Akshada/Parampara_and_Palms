@@ -31,11 +31,11 @@ const ViewOrder = () => {
     if (!data) return <AdminLayout><p className="text-center p-5">Loading...</p></AdminLayout>;
 
     const { order, food, tracking } = data;
-    
+
     const statusOptions = [
         "Order Confirmed", "Order Being Prepared", "Order Picked Up", "Order Delivered", "Order Cancelled"
     ];
-    
+
     const currentStatus = order?.order_final_status || "Pending";
     const visibleStatusOptions = statusOptions.slice(statusOptions.indexOf(currentStatus) + 1);
 
@@ -49,27 +49,27 @@ const ViewOrder = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ order_number: order?.order_number, status: statusVal, remark }),
         })
-        .then(async (res) => {
-            const result = await res.json();
-            if (res.ok) {
-                toast.success(result.message || 'Status updated successfully!');
-                
-                // 🛠️ REDIRECTION LOGIC FOR STATUS CANCELLATIONS
-                if (statusVal === "Order Cancelled") {
-                    setTimeout(() => {
-                        navigate('/my-orders'); // Adjust this route slug string to match your Admin Order History page route
-                    }, 1200);
+            .then(async (res) => {
+                const result = await res.json();
+                if (res.ok) {
+                    toast.success(result.message || 'Status updated successfully!');
+
+                    // 🛠️ REDIRECTION LOGIC FOR STATUS CANCELLATIONS
+                    if (statusVal === "Order Cancelled") {
+                        setTimeout(() => {
+                            navigate('/my-orders'); // Adjust this route slug string to match your Admin Order History page route
+                        }, 1200);
+                    } else {
+                        setTimeout(() => window.location.reload(), 1000);
+                    }
                 } else {
-                    setTimeout(() => window.location.reload(), 1000);
+                    toast.error(result.error || 'Failed to update status');
                 }
-            } else {
-                toast.error(result.error || 'Failed to update status');
-            }
-        })
-        .catch(err => {
-            toast.error('Server error. Please try again later.');
-            console.error(err);
-        });
+            })
+            .catch(err => {
+                toast.error('Server error. Please try again later.');
+                console.error(err);
+            });
     };
 
     return (
@@ -118,9 +118,9 @@ const ViewOrder = () => {
                                         {food && food.map((item, i) => (
                                             <tr key={i}>
                                                 <td>
-                                                    <img 
-                                                        src={item.image ? `http://localhost:8000${item.image}` : 'https://via.placeholder.com/50'} 
-                                                        width="50" height="50" className="rounded shadow-sm" alt={item.item_name} 
+                                                    <img
+                                                        src={item.image ? (item.image.startsWith('http') ? item.image : `https://parampara-and-palms.onrender.com${item.image}`) : 'https://via.placeholder.com/50'}
+                                                        width="50" height="50" className="rounded shadow-sm" alt={item.item_name}
                                                         style={{ objectFit: 'cover' }}
                                                     />
                                                 </td>
