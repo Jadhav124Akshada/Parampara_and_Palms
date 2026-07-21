@@ -116,7 +116,7 @@ const Cart = () => {
                                     <div className='card shadow-sm'>
                                         <div className='row g-0'>
                                             <div className='col-md-4'>
-                                                <img src={`http://localhost:8000${item.food.image}`} className='img-fluid rounded-start w-100' style={{ minHeight: '200px', objectFit: 'cover' }} alt={item.food.item_name} />
+                                                <img src={item.food.image?.startsWith('http') ? item.food.image : `https://parampara-and-palms.onrender.com${item.food.image}`} className='img-fluid rounded-start w-100' style={{ minHeight: '200px', objectFit: 'cover' }} alt={item.food.item_name} />
                                             </div>
                                             <div className='col-md-8'>
                                                 <div className='card-body'>
