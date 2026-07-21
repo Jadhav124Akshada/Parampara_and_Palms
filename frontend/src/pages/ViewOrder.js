@@ -28,6 +28,27 @@ const ViewOrder = () => {
             });
     }, [orderNumber, adminUser, navigate]);
 
+    // 🛡️ Bulletproof URL cleaner helper function
+    const getSafeImageUrl = (imagePath) => {
+        if (!imagePath) return 'https://via.placeholder.com/50';
+
+        if (imagePath.includes('localhost:8000') || imagePath.includes('127.0.0.1:8000')) {
+            return imagePath
+                .replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
+                .replace('http://127.0.0.1:8000', 'https://parampara-and-palms.onrender.com');
+        }
+
+        if (imagePath.startsWith('https://parampara-and-palms.onrender.com')) {
+            return imagePath;
+        }
+
+        if (imagePath.startsWith('/')) {
+            return `https://parampara-and-palms.onrender.com${imagePath}`;
+        }
+
+        return `https://parampara-and-palms.onrender.com/${imagePath}`;
+    };
+
     if (!data) return <AdminLayout><p className="text-center p-5">Loading...</p></AdminLayout>;
 
     const { order, food, tracking } = data;
@@ -54,10 +75,9 @@ const ViewOrder = () => {
                 if (res.ok) {
                     toast.success(result.message || 'Status updated successfully!');
 
-                    // 🛠️ REDIRECTION LOGIC FOR STATUS CANCELLATIONS
                     if (statusVal === "Order Cancelled") {
                         setTimeout(() => {
-                            navigate('/my-orders'); // Adjust this route slug string to match your Admin Order History page route
+                            navigate('/my-orders');
                         }, 1200);
                     } else {
                         setTimeout(() => window.location.reload(), 1000);
@@ -71,30 +91,6 @@ const ViewOrder = () => {
                 console.error(err);
             });
     };
-
-const getSafeImageUrl = (imagePath) => {
-    if (!imagePath) return 'https://via.placeholder.com/50';
-
-    // 1. If it contains localhost, ruthlessly swap it for your live domain
-    if (imagePath.includes('localhost:8000') || imagePath.includes('127.0.0.1:8000')) {
-        return imagePath
-            .replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
-            .replace('http://127.0.0.1:8000', 'https://parampara-and-palms.onrender.com');
-    }
-
-    // 2. If it's already a correct Render HTTPS URL, leave it alone
-    if (imagePath.startsWith('https://parampara-and-palms.onrender.com')) {
-        return imagePath;
-    }
-
-    // 3. If it's a relative path (like "/media/food_images/...")
-    if (imagePath.startsWith('/')) {
-        return `https://parampara-and-palms.onrender.com${imagePath}`;
-    }
-
-    // 4. Fallback for anything else
-    return `https://parampara-and-palms.onrender.com/${imagePath}`;
-};
 
     return (
         <AdminLayout>
@@ -142,14 +138,14 @@ const getSafeImageUrl = (imagePath) => {
                                         {food && food.map((item, i) => (
                                             <tr key={i}>
                                                 <td>
-                                                       <img
-    src={getSafeImageUrl(item.image)}
-    width="50" 
-    height="50" 
-    className="rounded shadow-sm" 
-    alt={item.item_name}
-    style={{ objectFit: 'cover' }}
-/>
+                                                    <img
+                                                        src={getSafeImageUrl(item.image)}
+                                                        width="50" 
+                                                        height="50" 
+                                                        className="rounded shadow-sm" 
+                                                        alt={item.item_name}
+                                                        style={{ objectFit: 'cover' }}
+                                                    />
                                                 </td>
                                                 <td className="align-middle fw-bold">{item.item_name}</td>
                                                 <td className="align-middle text-end text-success pe-3">₹{item.price}</td>
