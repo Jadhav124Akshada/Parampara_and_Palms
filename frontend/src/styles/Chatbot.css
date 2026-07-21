@@ -1,0 +1,582 @@
+.chatbot-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    font-family: "Segoe UI", sans-serif;
+}
+
+
+/* =========================
+   Floating Chatbot Image Button
+========================= */
+
+.chat-launcher {
+
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+
+    background:#008080;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 25px rgba(0,128,128,0.45);
+
+}
+
+
+
+.chatbot-image {
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.close-icon {
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+
+
+/* =========================
+        Chat Window
+========================= */
+
+
+.chat-window {
+
+    width: 390px;
+    height: 570px;
+
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.25);
+
+}
+
+
+
+
+/* =========================
+          Header
+========================= */
+
+
+.chat-header {
+
+
+    background:
+    linear-gradient(
+    135deg,
+    #008080,
+    #00a6a6
+    );
+
+
+    color:white;
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+}
+
+
+
+.chat-header-info {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+.chat-avatar {
+
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+}
+
+
+
+.chat-header h4 {
+
+    margin:0;
+
+    font-size:17px;
+
+}
+
+
+.chat-header span {
+
+    font-size:12px;
+
+    color:#d9ffff;
+
+}
+
+
+
+.close-btn {
+
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+
+
+/* =========================
+          Messages
+========================= */
+
+
+.chat-messages {
+
+    flex:1;
+
+    padding:16px;
+
+    overflow-y:auto;
+
+    background:#f3ffff;
+
+}
+
+
+
+.chat-msg {
+
+    display:flex;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.user-msg {
+
+    justify-content:flex-end;
+
+}
+
+
+.bot-msg {
+
+    justify-content:flex-start;
+
+}
+
+
+
+
+.chat-msg-bubble {
+
+
+    max-width:80%;
+
+    padding:12px 15px;
+
+    border-radius:18px;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    white-space:pre-line;
+
+}
+
+
+
+.user-msg .chat-msg-bubble {
+
+
+    background:#008080;
+
+    color:white;
+
+    border-bottom-right-radius:5px;
+
+}
+
+
+
+.bot-msg .chat-msg-bubble {
+
+
+    background:white;
+
+    color:#333;
+
+    border-bottom-left-radius:5px;
+
+
+    box-shadow:
+    0 3px 10px rgba(0,128,128,0.15);
+
+}
+
+
+
+
+/* =========================
+      Redirect Button
+========================= */
+
+
+.redirect-btn {
+
+
+    margin-top:10px;
+
+    background:#008080;
+
+    color:white;
+
+    border:none;
+
+    padding:9px 14px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+
+
+.redirect-btn:hover {
+
+
+    background:#006666;
+
+}
+
+
+
+
+/* =========================
+        Quick Buttons
+========================= */
+
+
+.quick-replies {
+
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    padding:12px;
+
+    background:white;
+
+    border-top:1px solid #ddd;
+
+}
+
+
+
+
+.quick-replies button {
+
+
+    border:1px solid #008080;
+
+    background:white;
+
+    color:#008080;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+}
+
+
+
+.quick-replies button:hover {
+
+
+    background:#008080;
+
+    color:white;
+
+}
+
+
+
+/* =========================
+          Input
+========================= */
+
+
+.chat-input-area {
+
+
+    display:flex;
+
+    gap:10px;
+
+    padding:14px;
+
+    background:white;
+
+    border-top:1px solid #ddd;
+
+
+}
+
+
+
+.chat-input-area input {
+
+
+    flex:1;
+
+    border:1px solid #ccc;
+
+    border-radius:25px;
+
+    padding:12px 15px;
+
+    outline:none;
+
+    font-size:14px;
+
+
+}
+
+
+
+.chat-input-area input:focus {
+
+
+    border-color:#008080;
+
+}
+
+
+
+
+.chat-input-area button {
+
+
+    background:#008080;
+
+    color:white;
+
+    border:none;
+
+    border-radius:25px;
+
+    padding:12px 20px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+
+}
+
+
+.chat-input-area button:hover {
+
+
+    background:#006666;
+
+}
+
+
+
+
+/* =========================
+        Typing Animation
+========================= */
+
+
+.typing {
+
+
+    display:flex;
+
+    gap:5px;
+
+}
+
+
+
+.typing span {
+
+
+    width:8px;
+
+    height:8px;
+
+    background:#008080;
+
+    border-radius:50%;
+
+    animation:bounce 1s infinite;
+
+
+}
+
+
+
+.typing span:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+
+.typing span:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+
+
+@keyframes bounce {
+
+
+    0%,100%{
+
+        transform:scale(.5);
+
+        opacity:.5;
+
+    }
+
+
+    50%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+/* =========================
+          Mobile
+========================= */
+
+
+@media(max-width:480px){
+
+
+.chat-window {
+
+
+    width:calc(100vw - 20px);
+
+    height:80vh;
+
+
+}
+
+
+.chatbot-container {
+
+
+    right:10px;
+
+    bottom:10px;
+
+
+}
+
+
+
+.chat-launcher {
+
+
+    width:65px;
+
+    height:65px;
+
+}
+
+
+}

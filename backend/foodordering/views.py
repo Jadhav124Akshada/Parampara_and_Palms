@@ -984,5 +984,201 @@ def admin_delete_review_api(request, review_id):
 
 
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import food, category
 
-        
+
+
+class ChatbotView(APIView):
+
+
+    def post(self,request):
+
+
+        message = request.data.get(
+            "message",
+            ""
+        ).lower()
+
+
+
+        # MENU
+
+        if "menu" in message or "food" in message:
+
+
+
+            reply = (
+                "🍽️ Welcome to Parampara & Palms!\n\n"
+                "Our restaurant offers delicious dishes "
+                "from different categories.\n\n"
+            )
+
+
+
+            cats = category.objects.all()[:3]
+
+
+
+            for cat in cats:
+
+
+                reply += f"⭐ {cat.category_name}\n"
+
+
+
+                items = food.objects.filter(
+
+                    category=cat,
+
+                    is_available=True
+
+                )[:3]
+
+
+
+                for item in items:
+
+
+                    reply += (
+                        f"• {item.item_name}"
+                        f" - ₹{item.price}\n"
+                    )
+
+
+
+                reply += "\n"
+
+
+
+
+            reply += (
+                "Would you like to see the full menu?"
+            )
+
+
+
+            return Response({
+
+                "reply":reply,
+
+                "redirect":"menu"
+
+            })
+
+
+
+
+
+
+
+        # CART
+
+        elif "cart" in message:
+
+
+
+            return Response({
+
+                "reply":
+                "🛒 Your cart contains your selected dishes.\n\n"
+                "You can update quantity or checkout.\n\n"
+                "Would you like to open your cart?",
+
+
+                "redirect":"cart"
+
+            })
+
+
+
+
+
+
+
+        # WISHLIST
+
+        elif "wishlist" in message or "favorite" in message:
+
+
+
+            return Response({
+
+                "reply":
+                "❤️ Your wishlist stores your favourite dishes.\n\n"
+                "Would you like to view your wishlist?",
+
+
+                "redirect":"wishlist"
+
+            })
+
+
+
+
+
+
+
+
+        # ORDERS
+
+        elif "order" in message:
+
+
+
+            return Response({
+
+                "reply":
+                "📦 Here you can check your previous and current orders.\n\n"
+                "Would you like to open your orders?",
+
+
+                "redirect":"orders"
+
+            })
+
+
+
+
+
+
+
+
+
+        # TRACK
+
+        elif "track" in message or "delivery" in message:
+
+
+
+            return Response({
+
+                "reply":
+                "🚚 Track your order status here.\n\n"
+                "You can check preparation, pickup and delivery status.\n\n"
+                "Would you like to track your order?",
+
+
+                "redirect":"track"
+
+            })
+
+
+
+
+
+
+
+
+        return Response({
+
+            "reply":
+            "👋 I can help you with:\n\n"
+            "🍽 Menu\n"
+            "🛒 Cart\n"
+            "❤️ Wishlist\n"
+            "📦 Orders\n"
+            
+
+        })

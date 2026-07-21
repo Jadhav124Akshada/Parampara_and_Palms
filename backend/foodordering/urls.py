@@ -54,6 +54,6 @@ urlpatterns = [
     path('food-rating-summary/<int:food_id>/', food_rating_summary_api),
     path('all-reviews/', list_all_reviews_api),
     path('review-delete/<int:review_id>/', admin_delete_review_api),
-    
+    path('chatbot/', ChatbotView.as_view(), name='chatbot'),
 
 ]
