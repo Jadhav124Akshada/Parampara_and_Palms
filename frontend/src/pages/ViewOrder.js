@@ -118,17 +118,11 @@ const ViewOrder = () => {
                                         {food && food.map((item, i) => (
                                             <tr key={i}>
                                                 <td>
-                                                    <img
-                                                        src={
-                                                            item.image
-                                                                ? (item.image.startsWith('http')
-                                                                    ? item.image.replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
-                                                                    : `https://parampara-and-palms.onrender.com${item.image.startsWith('/') ? '' : '/'}${item.image}`)
-                                                                : 'https://via.placeholder.com/50'
-                                                        }
-                                                        width="50" height="50" className="rounded shadow-sm" alt={item.item_name}
-                                                        style={{ objectFit: 'cover' }}
-                                                    />
+                                                       <img
+    src={item.image || 'https://via.placeholder.com/50'}
+    width="50" height="50" className="rounded shadow-sm" alt={item.item_name}
+    style={{ objectFit: 'cover' }}
+/>
                                                 </td>
                                                 <td className="align-middle fw-bold">{item.item_name}</td>
                                                 <td className="align-middle text-end text-success pe-3">₹{item.price}</td>
