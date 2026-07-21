@@ -200,8 +200,7 @@ const FoodDetail = () => {
                     <div className='col-md-5 text-center'>
                         <Zoom>
                             <img 
-                                src={`http://localhost:8000${food.image}`} 
-                                className='img-fluid rounded shadow-sm' 
+                                src={food.image?.startsWith('http') ? food.image : `https://parampara-and-palms.onrender.com${food.image}`}                                  className='img-fluid rounded shadow-sm' 
                                 style={{ width: '100%', maxHeight: '350px', objectFit: 'cover' }} 
                                 alt={food.item_name}
                             />
