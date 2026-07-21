@@ -72,6 +72,30 @@ const ViewOrder = () => {
             });
     };
 
+const getSafeImageUrl = (imagePath) => {
+    if (!imagePath) return 'https://via.placeholder.com/50';
+
+    // 1. If it contains localhost, ruthlessly swap it for your live domain
+    if (imagePath.includes('localhost:8000') || imagePath.includes('127.0.0.1:8000')) {
+        return imagePath
+            .replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
+            .replace('http://127.0.0.1:8000', 'https://parampara-and-palms.onrender.com');
+    }
+
+    // 2. If it's already a correct Render HTTPS URL, leave it alone
+    if (imagePath.startsWith('https://parampara-and-palms.onrender.com')) {
+        return imagePath;
+    }
+
+    // 3. If it's a relative path (like "/media/food_images/...")
+    if (imagePath.startsWith('/')) {
+        return `https://parampara-and-palms.onrender.com${imagePath}`;
+    }
+
+    // 4. Fallback for anything else
+    return `https://parampara-and-palms.onrender.com/${imagePath}`;
+};
+
     return (
         <AdminLayout>
             <ToastContainer position='bottom-center' theme='colored' />
@@ -119,14 +143,11 @@ const ViewOrder = () => {
                                             <tr key={i}>
                                                 <td>
                                                        <img
-    src={
-        item.image 
-            ? item.image
-                .replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
-                .replace('http://127.0.0.1:8000', 'https://parampara-and-palms.onrender.com')
-            : 'https://via.placeholder.com/50'
-    }
-    width="50" height="50" className="rounded shadow-sm" alt={item.item_name}
+    src={getSafeImageUrl(item.image)}
+    width="50" 
+    height="50" 
+    className="rounded shadow-sm" 
+    alt={item.item_name}
     style={{ objectFit: 'cover' }}
 />
                                                 </td>
