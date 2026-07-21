@@ -34,7 +34,7 @@ const AdminDashboard = () => {
         
         let isMounted = true; 
 
-        fetch('https://parampara-and-palms.onrender.com/api/dashboard-metrics/')
+        fetch('https://parampara-and-palms.onrender.com/dashboard-metrics/')
             .then(res => {
                 if (!res.ok) throw new Error("Server response error");
                 return res.json();
