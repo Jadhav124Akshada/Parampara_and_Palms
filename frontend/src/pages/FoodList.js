@@ -245,8 +245,7 @@ const FoodList = () => {
                                         {/* Image Section containing hidden description drawer layer */}
                                         <div className="image-container-overlay">
                                             <img 
-                                                src={food.image?.startsWith('http') ? food.image : `http://localhost:8000${food.image}`} 
-                                                className='card-img-top' 
+                                              src={food.image?.startsWith('http') ? food.image : `https://parampara-and-palms.onrender.com${food.image}`}                                                className='card-img-top' 
                                                 alt={food.item_name || food.name} 
                                                 style={{ height: '220px', objectFit: 'cover' }}
                                             />
