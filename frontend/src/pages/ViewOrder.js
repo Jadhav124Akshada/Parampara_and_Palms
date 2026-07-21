@@ -119,7 +119,13 @@ const ViewOrder = () => {
                                             <tr key={i}>
                                                 <td>
                                                     <img
-                                                        src={item.image ? (item.image.startsWith('http') ? item.image : `https://parampara-and-palms.onrender.com${item.image}`) : 'https://via.placeholder.com/50'}
+                                                        src={
+                                                            item.image
+                                                                ? (item.image.startsWith('http')
+                                                                    ? item.image.replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
+                                                                    : `https://parampara-and-palms.onrender.com${item.image}`)
+                                                                : 'https://via.placeholder.com/50'
+                                                        }
                                                         width="50" height="50" className="rounded shadow-sm" alt={item.item_name}
                                                         style={{ objectFit: 'cover' }}
                                                     />
