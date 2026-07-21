@@ -85,11 +85,21 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
     
 class OrderFoodSerializer(serializers.ModelSerializer):
     item_name = serializers.CharField(source='food.item_name', read_only=True)
-    price = serializers.CharField(source='food.price', read_only=True)
-    image = serializers.ImageField(source='food.image', read_only=True)
+    price = serializers.DecimalField(source='food.price', max_digits=10, decimal_places=2, read_only=True)
+    image = serializers.SerializerMethodField()
+
     class Meta:
-        model = food
-        fields = [ 'item_name','price', 'image' ]
+        model = cart  # <--- Must be cart to match order_food queryset
+        fields = ['item_name', 'price', 'image', 'quantity']
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.food and obj.food.image:
+            image_url = obj.food.image.url
+            if request:
+                return request.build_absolute_uri(image_url)
+            return f"https://parampara-and-palms.onrender.com{image_url}"
+        return None
 
 class FoodTrackingSerializer(serializers.ModelSerializer):
 
