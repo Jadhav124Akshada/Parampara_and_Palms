@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // पेजिनेशन स्टेट्स
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); // एक पेज पर 6 आइटम्स (2 लाइन * 3 कार्ड्स)
@@ -65,7 +65,7 @@ const Wishlist = () => {
   return (
     <PublicLayout>
       <ToastContainer position="top-right" autoClose={2000} theme="light" />
-      
+
       <div className="container py-5 min-vh-100">
         <h2 className="fw-bold mb-4 text-center">
           My Favorites Wishlist <FaHeart className="text-danger ms-2" />
@@ -93,7 +93,12 @@ const Wishlist = () => {
                 <div className="col-md-4 mb-4" key={item.id}>
                   <div className="card shadow-sm h-100 border-0 overflow-hidden" style={{ borderRadius: '12px' }}>
                     <div className="position-relative">
-                      <img src={`http://localhost:8000${item.image}`} className="card-img-top w-100" style={{ height: '200px', objectFit: 'cover' }} alt={item.item_name} />
+                      <img
+                        src={item.image?.startsWith('http') ? item.image : `https://parampara-and-palms.onrender.com${item.image}`}
+                        className="card-img-top w-100"
+                        style={{ height: '200px', objectFit: 'cover' }}
+                        alt={item.item_name}
+                      />
                       <button className="btn btn-light position-absolute top-0 end-0 m-3 shadow-sm" style={{ borderRadius: '50%', color: '#dc3545' }} onClick={() => removeFromWishlist(item.food_id)}>
                         <FaTrash />
                       </button>
@@ -115,20 +120,20 @@ const Wishlist = () => {
 
             {/* पेजिनेशन बटन सेक्शन */}
             <div className="mt-4 pb-4 text-center">
-                    <nav>
-                        <ul className="pagination justify-content-center shadow-sm d-inline-flex">
-                            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                <button className="page-link text-dark fw-bold" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>Previous</button>
-                            </li>
-                            <li className="page-item disabled">
-                                <span className="page-link text-dark fw-bold">Page {currentPage} of {totalPages}</span>
-                            </li>
-                            <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                                <button className="page-link text-dark fw-bold" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>Next</button>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+              <nav>
+                <ul className="pagination justify-content-center shadow-sm d-inline-flex">
+                  <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                    <button className="page-link text-dark fw-bold" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>Previous</button>
+                  </li>
+                  <li className="page-item disabled">
+                    <span className="page-link text-dark fw-bold">Page {currentPage} of {totalPages}</span>
+                  </li>
+                  <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                    <button className="page-link text-dark fw-bold" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>Next</button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </>
         )}
       </div>
