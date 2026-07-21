@@ -12,7 +12,7 @@ const OrderDetails = () => {
     const [orderAddress, setOrderAddress] = useState(null);
     const [total, setTotal] = useState(0);
     const [showCancelModal, setShowCancelModal] = useState(false);
-    
+
     const navigate = useNavigate();
     const { order_number } = useParams();
 
@@ -41,14 +41,14 @@ const OrderDetails = () => {
 
     // JavaScript uses .trim() instead of Python's .strip()
     const currentStatus = orderAddress?.order_final_status ? orderAddress.order_final_status.toLowerCase().trim() : 'pending';
-    
+
     // Cancellation criteria rule matching Pankaj's video guide guidelines
     const isEligibleForCancellation = ['pending', 'order confirmed', 'food being prepared', 'waiting for restaurant confirmation', ''].includes(currentStatus);
 
     return (
         <PublicLayout>
             <ToastContainer position="top-right" autoClose={3000} theme="light" />
-            
+
             <div className='container py-5'>
                 <h3 className='mb-4 d-flex align-items-center'>
                     <FaReceipt className="me-2 text-secondary" /> Order: {order_number} Details
@@ -60,11 +60,17 @@ const OrderDetails = () => {
                             <div className='card mb-3 shadow-sm' key={index}>
                                 <div className='row g-0'>
                                     <div className='col-md-4'>
-                                        <img 
-                                            src={`http://localhost:8000${item.food.image}`} 
-                                            className='img-fluid rounded-start' 
-                                            style={{ height: '300px', width: '100%', objectFit: 'cover' }} 
-                                            alt={item.food.item_name} 
+                                        <img
+                                            src={
+                                                item.food.image
+                                                    ? (item.food.image.startsWith('http')
+                                                        ? item.food.image.replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
+                                                        : `https://parampara-and-palms.onrender.com${item.food.image.startsWith('/') ? '' : '/'}${item.food.image}`)
+                                                    : 'https://via.placeholder.com/300'
+                                            }
+                                            className='img-fluid rounded-start'
+                                            style={{ height: '300px', width: '100%', objectFit: 'cover' }}
+                                            alt={item.food.item_name}
                                         />
                                     </div>
                                     <div className='col-md-8'>
@@ -97,7 +103,7 @@ const OrderDetails = () => {
                                 </p>
                                 <p><strong>Payment Mode: </strong><span className='badge bg-info text-dark'>{orderAddress.payment_mode}</span></p>
                                 <p><strong>Total: </strong>₹ {total}</p>
-                                
+
                                 <a href={`https://parampara-and-palms.onrender.com/api/invoice/${order_number}`} target='_blank' rel="noreferrer" className='btn btn-success w-100 my-2 d-flex align-items-center justify-content-center'>
                                     <FaFileInvoice className="me-2" /> Invoice
                                 </a>
@@ -118,11 +124,11 @@ const OrderDetails = () => {
             </div>
 
             {/* Mount Popup Component Container */}
-            <CancelOrderModal 
-                show={showCancelModal} 
-                handleClose={() => setShowCancelModal(false)} 
-                orderNumber={order_number} 
-                paymentMode={orderAddress?.payment_mode} 
+            <CancelOrderModal
+                show={showCancelModal}
+                handleClose={() => setShowCancelModal(false)}
+                orderNumber={order_number}
+                paymentMode={orderAddress?.payment_mode}
             />
         </PublicLayout>
     );
