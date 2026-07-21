@@ -93,7 +93,7 @@ const Wishlist = () => {
                 <div className="col-md-4 mb-4" key={item.id}>
                   <div className="card shadow-sm h-100 border-0 overflow-hidden" style={{ borderRadius: '12px' }}>
                     <div className="position-relative">
-                      <img src={item.food.image?.startsWith('http') ? item.food.image : `https://parampara-and-palms.onrender.com${item.food.image}`} className="card-img-top w-100" style={{ height: '200px', objectFit: 'cover' }} alt={item.item_name} />
+                      <img src={`http://localhost:8000${item.image}`} className="card-img-top w-100" style={{ height: '200px', objectFit: 'cover' }} alt={item.item_name} />
                       <button className="btn btn-light position-absolute top-0 end-0 m-3 shadow-sm" style={{ borderRadius: '50%', color: '#dc3545' }} onClick={() => removeFromWishlist(item.food_id)}>
                         <FaTrash />
                       </button>
