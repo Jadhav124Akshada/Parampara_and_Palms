@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PublicLayout from '../components/PublicLayout';
 import '../styles/home.css';
 import { Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';    
-import 'react-toastify/dist/ReactToastify.css'; 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useWishlist } from '../context/WishlistContext';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'; // 🛠️ FaStarHalfAlt इम्पोर्ट किया गया
 
@@ -33,7 +33,7 @@ const Home = () => {
 
     const fetchAllSummaries = async () => {
       const aggregatedMap = {};
-      
+
       for (let item of foods) {
         try {
           const res = await fetch(`https://parampara-and-palms.onrender.com/api/food-rating-summary/${item.id}/`);
@@ -57,8 +57,8 @@ const Home = () => {
       fetch(`https://parampara-and-palms.onrender.com/api/wishlist/${userId}/`)
         .then(res => res.json())
         .then(data => {
-          const wishlistIds = Array.isArray(data) 
-            ? data.map(item => item.food_id || item.food) 
+          const wishlistIds = Array.isArray(data)
+            ? data.map(item => item.food_id || item.food)
             : (data.wishlist_ids || []);
           setWishlist(wishlistIds);
           setWishlistCount(wishlistIds.length);
@@ -73,22 +73,22 @@ const Home = () => {
       toast.info("Please log in to use the wishlist feature.");
       return;
     }
-    
+
     const isInWishlist = wishlist.includes(foodId);
     const endpoint = isInWishlist ? 'remove-wishlist/' : 'add-wishlist/';
-    
+
     try {
       const response = await fetch(`https://parampara-and-palms.onrender.com/api/${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, food_id: foodId })
       });
-      
+
       const resData = await response.json();
 
       if (response.ok) {
         let updatedWishlist = [];
-        
+
         if (isInWishlist) {
           updatedWishlist = wishlist.filter(id => id !== foodId);
           setWishlist(updatedWishlist);
@@ -112,7 +112,7 @@ const Home = () => {
   const renderStars = (ratingValue) => {
     const numericRating = Math.min(5, Math.max(0, parseFloat(ratingValue || 0))); // 0 से 5 के बीच सीमित रखें
     const starsArray = [];
-    
+
     for (let i = 1; i <= 5; i++) {
       if (numericRating >= i) {
         // पूर्ण भरा हुआ स्टार
@@ -131,7 +131,7 @@ const Home = () => {
   return (
     <PublicLayout>
       <ToastContainer position="top-right" autoClose={3000} theme="light" />
-      
+
       {/* Hero Header Banner */}
       <section className="hero py-5 text-center" style={{ backgroundImage: "url('/images/b5.png')", height: '80vh', backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div style={{ backgroundColor: 'rgba(0,0,0,0.5)', padding: '40px 20px', borderRadius: '10px' }}>
@@ -172,7 +172,7 @@ const Home = () => {
                     <div className='card hovereffect shadow-sm h-100' style={{ borderRadius: '12px', overflow: 'hidden', border: 'none' }}>
                       <div className='position-relative'>
                         <img
-                          src={`http://localhost:8000${food.image}`}
+                          src={food.image?.startsWith('http') ? food.image : `https://parampara-and-palms.onrender.com${food.image}`}
                           className='card-img-top w-100'
                           style={{ height: '180px', objectFit: 'cover' }}
                           alt={food.item_name}
@@ -199,20 +199,20 @@ const Home = () => {
                           <h5 className='card-title fw-bold mb-1'>
                             <Link to={`/food/${food.id}`} className="text-decoration-none text-dark">{food.item_name}</Link>
                           </h5>
-                          
+
                           {/* ======================================================== */}
                           {/* 🛠️ स्टार रेटिंग्स और पॉपओवर पैनल (STAR RATINGS & POPOVER SECTION) */}
                           {/* ======================================================== */}
                           {summary && (
-                            <div 
-                              className="position-relative d-flex align-items-center mb-2" 
+                            <div
+                              className="position-relative d-flex align-items-center mb-2"
                               style={{ fontSize: '14px', height: '22px', cursor: 'pointer', width: 'fit-content' }}
                               onMouseEnter={() => setHoveredFoodId(food.id)} // 👈 स्टार्स पर माउस जाने पर एक्टिव करें
                               onMouseLeave={() => setHoveredFoodId(null)}    // 👈 माउस हटने पर छुपाएं
                             >
                               {/* 🛠️ यहाँ एवरेज के आधार पर डाइनेमिक रूप से हाफ और फुल स्टार्स रेंडर होते हैं */}
                               {renderStars(avgRating)}
-                              
+
                               {/* 🛠️ केवल होवर होने पर एवरेज रेटिंग और कुल रेटिंग संख्या दिखाई देगी */}
                               {hoveredFoodId === food.id && (
                                 <span className="text-muted small ms-2 fw-semibold popover-animation" style={{ fontSize: '12px' }}>
@@ -222,13 +222,13 @@ const Home = () => {
 
                               {/* 🛠️ केवल होवर होने पर ब्रेकडाउन पॉपओवर दिखाई देगा */}
                               {hoveredFoodId === food.id && totalRatingsCount > 0 && (
-                                <div 
+                                <div
                                   className="position-absolute bg-white text-dark shadow-lg border p-3 popover-rating-matrix"
-                                  style={{ 
-                                    bottom: '28px', 
-                                    left: '0', 
-                                    width: '260px', 
-                                    borderRadius: '8px', 
+                                  style={{
+                                    bottom: '28px',
+                                    left: '0',
+                                    width: '260px',
+                                    borderRadius: '8px',
                                     zIndex: '999',
                                     boxShadow: '0 4px 15px rgba(0,0,0,0.15)'
                                   }}
@@ -243,12 +243,12 @@ const Home = () => {
                                         <span className="me-2 fw-semibold text-start" style={{ width: '40px' }}>{starKey} star</span>
                                         {/* प्रोग्रेस बार */}
                                         <div className="progress flex-grow-1 bg-light border-0" style={{ height: '8px', borderRadius: '4px' }}>
-                                          <div 
-                                            className="progress-bar bg-warning" 
-                                            role="progressbar" 
+                                          <div
+                                            className="progress-bar bg-warning"
+                                            role="progressbar"
                                             style={{ width: `${calculatePercent}%`, borderRadius: '4px' }}
-                                            aria-valuenow={calculatePercent} 
-                                            aria-valuemin="0" 
+                                            aria-valuenow={calculatePercent}
+                                            aria-valuemin="0"
                                             aria-valuemax="100"
                                           ></div>
                                         </div>
@@ -263,7 +263,7 @@ const Home = () => {
 
                           <p className='card-text text-muted small mt-1'>{food.description?.slice(0, 50)}...</p>
                         </div>
-                        
+
                         <div className='d-flex justify-content-between align-items-center mt-3 border-top pt-2'>
                           <span className='fw-bold text-success' style={{ fontSize: '1.1rem' }}>₹{food.price}</span>
                           {food.is_available ? (
