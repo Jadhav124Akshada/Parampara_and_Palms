@@ -398,9 +398,9 @@ def view_order_details_api(request, order_number):
         tracking = FoodTracking.objects.filter(order_number=order_number).order_by('-status_date')
         
         return Response({
-            'order': OrderDetailsSerializer(order_address).data,
-            'food': OrderFoodSerializer(order_food, many=True).data,
-            'tracking': FoodTrackingSerializer(tracking, many=True).data
+            'order': OrderDetailsSerializer(order_address, context={'request': request}).data,
+            'food': OrderFoodSerializer(order_food, many=True, context={'request': request}).data,
+            'tracking': FoodTrackingSerializer(tracking, many=True, context={'request': request}).data
         })
     except OrderAddress.DoesNotExist:
         return Response({"message": "Order not found"}, status=404)
