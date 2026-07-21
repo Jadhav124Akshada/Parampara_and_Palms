@@ -1,1 +1,5 @@
 
+django
+djangorestframework
+gunicorn
+packaging
