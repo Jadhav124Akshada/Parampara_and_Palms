@@ -31,7 +31,7 @@ const SearchPage = () => {
         }
 
         try {
-            const response = await fetch('https://parampara-and-palms.onrender.com/api/add_to_cart/', {
+            const response = await fetch('https://parampara-and-palms.onrender.com/api/cart/add/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -40,6 +40,7 @@ const SearchPage = () => {
                     quantity: 1
                 })
             });
+
 
             if (response.ok) {
                 toast.success("Item added to cart! Redirecting...");
@@ -68,15 +69,15 @@ const SearchPage = () => {
                         results.map((food, index) => (
                             <div className='col-md-4 mb-4' key={index}>
                                 <div className='card hovereffect h-100 shadow-sm border-0'>
-                                    <img 
+                                    <img
                                         src={
-                                            food.image 
-                                                ? (food.image.startsWith('http') 
-                                                    ? food.image.replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com') 
-                                                    : `https://parampara-and-palms.onrender.com${food.image.startsWith('/') ? '' : '/'}${food.image}`) 
+                                            food.image
+                                                ? (food.image.startsWith('http')
+                                                    ? food.image.replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
+                                                    : `https://parampara-and-palms.onrender.com${food.image.startsWith('/') ? '' : '/'}${food.image}`)
                                                 : 'https://via.placeholder.com/300'
-                                        } 
-                                        className='card-img-top' 
+                                        }
+                                        className='card-img-top'
                                         style={{ height: '180px', objectFit: 'cover' }}
                                         alt={food.item_name}
                                     />
@@ -88,8 +89,8 @@ const SearchPage = () => {
                                         <div className='d-flex justify-content-between align-items-center mt-auto pt-2'>
                                             <span className='fw-bold text-success'>₹ {food.price}</span>
                                             {food.is_available ? (
-                                                <button 
-                                                    onClick={() => handleAddToCart(food.id)} 
+                                                <button
+                                                    onClick={() => handleAddToCart(food.id)}
                                                     className='btn btn-sm btn-outline-primary'
                                                 >
                                                     <i className='fas fa-shopping-basket me-1'></i>Order Now
