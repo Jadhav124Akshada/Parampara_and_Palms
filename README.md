@@ -60,3 +60,8 @@ Parampara_and_Palms/
 │   └── requirements.txt
 │
 └── README.md
+
+**Privew**
+
+<img width="1897" height="905" alt="Screenshot 2026-07-22 105229" src="https://github.com/user-attachments/assets/b31f0979-9739-4769-92a9-82a5b32b6413" />
+
