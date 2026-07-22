@@ -28,19 +28,19 @@ A full-stack **Food Ordering Web Application** built with **React.js** and **Dja
 ## 📸 Preview
 
 ### 🏠 Home Page
-![Home Page](screenshots/home.png)
+![Home Page](screenshot/home.png)
 
 ### 🍕 Menu Page
-![Menu Page](screenshots/menu.png)
+![Menu Page](screenshot/menu.png)
 
 ### 🛒 Cart Page
-![Cart Page](screenshots/cart.png)
+![Cart Page](screenshot/cart.png)
 
 ### 📦 Order Tracking
-![Order Tracking](screenshots/order-tracking.png)
+![Order Tracking](screenshot/order-tracking.png)
 
 ### 📊 Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
+![Admin Dashboard](screenshot/admin-dashboard.png)
 
 ---
 ## 🛠️ Tech Stack
