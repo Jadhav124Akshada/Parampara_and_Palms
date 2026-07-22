@@ -61,7 +61,21 @@ Parampara_and_Palms/
 │
 └── README.md
 
-**Privew**
+## 📸 Preview
 
-<img width="1897" height="905" alt="Screenshot 2026-07-22 105229" src="https://github.com/user-attachments/assets/b31f0979-9739-4769-92a9-82a5b32b6413" />
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
+### 🍕 Menu Page
+![Menu Page](screenshots/menu.png)
+
+### 🛒 Cart Page
+![Cart Page](screenshots/cart.png)
+
+### 📦 Order Tracking
+![Order Tracking](screenshots/order-tracking.png)
+
+### 📊 Admin Dashboard
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
 
