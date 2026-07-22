@@ -25,7 +25,24 @@ A full-stack **Food Ordering Web Application** built with **React.js** and **Dja
 - Update order status
 
 ---
+## 📸 Preview
 
+### 🏠 Home Page
+![Home Page](screenshots/home.png)
+
+### 🍕 Menu Page
+![Menu Page](screenshots/menu.png)
+
+### 🛒 Cart Page
+![Cart Page](screenshots/cart.png)
+
+### 📦 Order Tracking
+![Order Tracking](screenshots/order-tracking.png)
+
+### 📊 Admin Dashboard
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+---
 ## 🛠️ Tech Stack
 
 ### Frontend
@@ -60,22 +77,5 @@ Parampara_and_Palms/
 │   └── requirements.txt
 │
 └── README.md
-
-## 📸 Preview
-
-### 🏠 Home Page
-![Home Page](screenshots/home.png)
-
-### 🍕 Menu Page
-![Menu Page](screenshots/menu.png)
-
-### 🛒 Cart Page
-![Cart Page](screenshots/cart.png)
-
-### 📦 Order Tracking
-![Order Tracking](screenshots/order-tracking.png)
-
-### 📊 Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
 
 
