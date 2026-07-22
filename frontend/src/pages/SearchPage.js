@@ -26,13 +26,11 @@ const SearchPage = () => {
             <div className='col-md-4 mb-4 '>
                 <div className='card hovereffect'>
                     <img
-                                                        src={getSafeImageUrl(item.image)}
-                                                        width="50" 
-                                                        height="50" 
-                                                        className="rounded shadow-sm" 
-                                                        alt={item.item_name}
-                                                        style={{ objectFit: 'cover' }}
-                                                    />
+                                        src={getSafeImageUrl(food.image)}
+                                        className="card-img-top rounded-top"
+                                        alt={food.item_name}
+                                        style={{ height: '200px', objectFit: 'cover' }}
+                                    />
                     <div className='card-body'>
                         <h5 className='card-title'>
                             <Link to="#">{food.item_name}</Link></h5>
