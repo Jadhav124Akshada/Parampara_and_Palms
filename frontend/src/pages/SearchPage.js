@@ -23,39 +23,39 @@ const SearchPage = () => {
     }, [query]);
 
     // Handle adding item to cart and redirecting to cart/checkout
-    const handleAddToCart = async (foodId) => {
-        if (!userId) {
-            toast.error("Please login first to place an order!");
-            setTimeout(() => navigate('/login'), 1500);
-            return;
+const handleAddToCart = async (foodId) => {
+    if (!userId) {
+        toast.error("Please login first to place an order!");
+        setTimeout(() => navigate('/login'), 1500);
+        return;
+    }
+
+    try {
+        const response = await fetch('https://parampara-and-palms.onrender.com/api/cart/add/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userID: userId,
+                foodID: foodId,
+                quantity: 1
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            toast.success(data.message || "Item added to cart! Redirecting...");
+            setTimeout(() => {
+                navigate('/cart');
+            }, 1000);
+        } else {
+            toast.error(data.message || "Failed to add item to cart");
         }
-
-        try {
-            const response = await fetch('https://parampara-and-palms.onrender.com/api/cart/add/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user_id: userId,
-                    food_id: foodId,
-                    quantity: 1
-                })
-            });
-
-
-            if (response.ok) {
-                toast.success("Item added to cart! Redirecting...");
-                setTimeout(() => {
-                    navigate('/cart'); // Change to '/payment' or your cart route slug if different
-                }, 1000);
-            } else {
-                const errorData = await response.json();
-                toast.error(errorData.message || "Failed to add item to cart");
-            }
-        } catch (error) {
-            console.error("Cart error:", error);
-            toast.error("Server error. Please try again.");
-        }
-    };
+    } catch (error) {
+        console.error("Cart error:", error);
+        toast.error("Server error. Please try again.");
+    }
+};
 
     return (
         <PublicLayout>
