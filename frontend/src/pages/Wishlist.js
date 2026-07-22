@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PublicLayout from '../components/PublicLayout';
-import { Link } from 'react-router-dom';
-import { FaHeart, FaTrash, FaShoppingBasket } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaHeart, FaTrash, FaShoppingBasket, FaTag } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import { useWishlist } from '../context/WishlistContext';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,12 +10,13 @@ const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // पेजिनेशन स्टेट्स
+  // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6); // एक पेज पर 6 आइटम्स (2 लाइन * 3 कार्ड्स)
+  const [itemsPerPage] = useState(6);
 
   const { setWishlistCount } = useWishlist();
   const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userId) {
@@ -34,6 +35,23 @@ const Wishlist = () => {
       setLoading(false);
     }
   }, [userId, setWishlistCount]);
+
+  // Bulletproof image URL cleaner
+  const getSafeImageUrl = (imagePath) => {
+    if (!imagePath) return 'https://via.placeholder.com/200';
+    if (imagePath.includes('localhost:8000') || imagePath.includes('127.0.0.1:8000')) {
+      return imagePath
+        .replace('http://localhost:8000', 'https://parampara-and-palms.onrender.com')
+        .replace('http://127.0.0.1:8000', 'https://parampara-and-palms.onrender.com');
+    }
+    if (imagePath.startsWith('https://parampara-and-palms.onrender.com')) {
+      return imagePath;
+    }
+    if (imagePath.startsWith('/')) {
+      return `https://parampara-and-palms.onrender.com${imagePath}`;
+    }
+    return `https://parampara-and-palms.onrender.com/${imagePath}`;
+  };
 
   const removeFromWishlist = async (foodId) => {
     try {
@@ -56,7 +74,32 @@ const Wishlist = () => {
     }
   };
 
-  // पेजिनेशन लॉजिक
+  // Direct Add to Cart function from Wishlist
+  const handleAddToCart = async (foodId) => {
+    try {
+      const response = await fetch('https://parampara-and-palms.onrender.com/api/cart/add/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userID: userId,
+          foodID: foodId,
+          quantity: 1
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success("Item added to cart! Redirecting...");
+        setTimeout(() => navigate('/cart'), 1000);
+      } else {
+        toast.error(data.message || "Failed to add item to cart");
+      }
+    } catch (error) {
+      toast.error("Server error. Please try again.");
+    }
+  };
+
+  // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = wishlistItems.slice(indexOfFirstItem, indexOfLastItem);
@@ -94,23 +137,39 @@ const Wishlist = () => {
                   <div className="card shadow-sm h-100 border-0 overflow-hidden" style={{ borderRadius: '12px' }}>
                     <div className="position-relative">
                       <img
-                        src={item.image?.startsWith('http') ? item.image : `https://parampara-and-palms.onrender.com${item.image}`}
+                        src={getSafeImageUrl(item.image)}
                         className="card-img-top w-100"
                         style={{ height: '200px', objectFit: 'cover' }}
                         alt={item.item_name}
                       />
-                      <button className="btn btn-light position-absolute top-0 end-0 m-3 shadow-sm" style={{ borderRadius: '50%', color: '#dc3545' }} onClick={() => removeFromWishlist(item.food_id)}>
+                      <button 
+                        className="btn btn-light position-absolute top-0 end-0 m-3 shadow-sm" 
+                        style={{ borderRadius: '50%', color: '#dc3545' }} 
+                        onClick={() => removeFromWishlist(item.food_id)}
+                      >
                         <FaTrash />
                       </button>
                     </div>
-                    <div className="card-body p-3">
+                    <div className="card-body p-3 d-flex flex-column">
+                      {/* Food Category Badge Added Here */}
+                      {item.category_name && (
+                        <div className="mb-2">
+                          <span className="badge bg-secondary bg-opacity-10 text-dark small px-2 py-1">
+                            <FaTag className="me-1 text-muted" /> {item.category_name}
+                          </span>
+                        </div>
+                      )}
                       <h5 className="card-title fw-bold">{item.item_name}</h5>
-                      <p className="text-muted small">{item.description?.slice(0, 65)}...</p>
-                      <div className="d-flex justify-content-between align-items-center mt-3">
+                      <p className="text-muted small flex-grow-1">{item.description?.slice(0, 65)}...</p>
+                      
+                      <div className="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
                         <span className="fw-bold text-success fs-5">₹{item.price}</span>
-                        <Link to={`/food/${item.food_id}`} className="btn btn-sm btn-outline-primary px-3 fw-bold">
+                        <button 
+                          onClick={() => handleAddToCart(item.food_id)} 
+                          className="btn btn-sm btn-outline-primary px-3 fw-bold"
+                        >
                           <FaShoppingBasket className="me-1" /> Order Now
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -118,7 +177,7 @@ const Wishlist = () => {
               ))}
             </div>
 
-            {/* पेजिनेशन बटन सेक्शन */}
+            {/* Pagination Controls */}
             <div className="mt-4 pb-4 text-center">
               <nav>
                 <ul className="pagination justify-content-center shadow-sm d-inline-flex">
